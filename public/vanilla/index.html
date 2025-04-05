@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SweetVoice - Voice Analysis Glucose Monitoring</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="SweetVoice uses AI-powered voice analysis to detect potential blood glucose fluctuations through voice pattern changes.">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">
+          <h1>Sweet<span>Voice</span></h1>
+        </div>
+        <div class="nav-links">
+          <a href="#" class="active">Home</a>
+          <a href="#demo">Demo</a>
+          <a href="#how-it-works">How It Works</a>
+          <a href="#features">Features</a>
+          <a href="#testimonials">Testimonials</a>
+          <div class="mobile-menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Monitor Glucose Levels with Just Your <span class="gradient-text">Voice</span></h1>
+          <p>SweetVoice uses advanced AI to analyze subtle vocal changes, offering a non-invasive alternative to traditional glucose monitoring.</p>
+          <div class="cta-buttons">
+            <a href="#demo" class="btn btn-primary">Try Demo <span class="icon">→</span></a>
+            <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80" alt="Voice analysis for glucose monitoring">
+            <div class="image-overlay">
+              <p>Painless. Accurate. Revolutionary.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" class="demo-section">
+      <div class="container">
+        <h2>Try SweetVoice <span class="gradient-text">Demo</span></h2>
+        <p class="subtitle">Experience our technology with two options: record your voice directly or upload an audio file.</p>
+
+        <div class="demo-grid">
+          <div class="demo-card">
+            <h3>Record Your Voice</h3>
+            <p>Speak into your microphone and get instant analysis of your voice patterns.</p>
+            
+            <div class="voice-recorder">
+              <div class="recorder-ui">
+                <div id="recording-button" class="record-btn">
+                  <span class="mic-icon">🎤</span>
+                </div>
+                <div id="recording-status" class="recording-status">Click to start recording</div>
+              </div>
+              
+              <div id="recording-progress" class="recording-progress hidden">
+                <div class="progress-label">
+                  <span>Recording</span>
+                  <span id="recording-time">0s / 5s</span>
+                </div>
+                <div class="progress-bar">
+                  <div id="progress-fill" class="progress-fill"></div>
+                </div>
+              </div>
+
+              <div id="analyzing" class="analyzing hidden">
+                <div class="loader"></div>
+                <span>Analyzing voice patterns...</span>
+              </div>
+
+              <div id="result-card" class="result-card hidden">
+                <div class="result-header">
+                  <span>Estimated Glucose:</span>
+                  <div class="result-value">
+                    <span id="glucose-value" class="glucose-reading">--</span>
+                    <span id="glucose-status" class="glucose-status">--</span>
+                  </div>
+                </div>
+                <p class="disclaimer">*This is a simulation. Actual results would be calibrated to your voice pattern.</p>
+              </div>
+
+              <button id="start-recording" class="btn btn-primary">Start Recording</button>
+            </div>
+          </div>
+
+          <div class="demo-card">
+            <h3>Upload Audio File</h3>
+            <p>Upload a pre-recorded voice sample in WAV or MP3 format for analysis.</p>
+            
+            <div class="file-uploader">
+              <div class="upload-zone" id="upload-zone">
+                <div class="upload-icon">📤</div>
+                <p>Click to upload or drag and drop</p>
+                <span>WAV or MP3 (max. 5MB)</span>
+                <input type="file" id="audio-file" accept="audio/wav,audio/mp3,audio/*" class="file-input">
+              </div>
+
+              <div id="file-info" class="file-info hidden">
+                <div class="file-details">
+                  <span class="file-icon">🎵</span>
+                  <span id="file-name" class="file-name">filename.mp3</span>
+                </div>
+                <button id="play-file" class="play-btn">🔊</button>
+              </div>
+
+              <div id="upload-progress" class="upload-progress hidden">
+                <div class="progress-bar">
+                  <div id="upload-progress-fill" class="progress-fill"></div>
+                </div>
+              </div>
+
+              <div id="file-analyzing" class="analyzing hidden">
+                <div class="loader"></div>
+                <span>Analyzing audio file...</span>
+              </div>
+
+              <div id="file-result" class="result-card hidden">
+                <div class="result-header">
+                  <span>Estimated Glucose:</span>
+                  <div class="result-value">
+                    <span id="file-glucose-value" class="glucose-reading">--</span>
+                    <span id="file-glucose-status" class="glucose-status">--</span>
+                  </div>
+                </div>
+                <p class="disclaimer">*This is a simulation. Actual results would be calibrated to your voice pattern.</p>
+              </div>
+
+              <button id="analyze-file" class="btn btn-primary" disabled>Analyze Audio</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="results-explanation">
+          <h3>Understanding Your Results</h3>
+          <div class="results-grid">
+            <div class="result-type">
+              <h4>Normal Range</h4>
+              <div class="range-bar normal"></div>
+              <p>70-140 mg/dL indicates a normal glucose range.</p>
+            </div>
+            <div class="result-type">
+              <h4>Low</h4>
+              <div class="range-bar low"></div>
+              <p>Below 70 mg/dL may indicate hypoglycemia.</p>
+            </div>
+            <div class="result-type">
+              <h4>High</h4>
+              <div class="range-bar high"></div>
+              <p>Above 140 mg/dL may indicate hyperglycemia.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="disclaimer-box">
+          <h3>Disclaimer</h3>
+          <p>
+            This demo provides simulated results for demonstration purposes only. 
+            SweetVoice is not a medical device and should not replace regular blood glucose monitoring 
+            methods prescribed by healthcare professionals.
+          </p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <h2>How SweetVoice <span class="gradient-text">Works</span></h2>
+        <!-- Additional content would go here -->
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2>Key <span class="gradient-text">Features</span></h2>
+        <!-- Additional content would go here -->
+      </div>
+    </section>
+
+    <section id="testimonials" class="section">
+      <div class="container">
+        <h2>What Our Users <span class="gradient-text">Say</span></h2>
+        <!-- Additional content would go here -->
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2>Ready to Experience the Future of Glucose Monitoring?</h2>
+        <p>Join our beta program today and be among the first to try SweetVoice.</p>
+        <a href="#" class="btn btn-primary">Join Beta Program</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h2>Sweet<span>Voice</span></h2>
+          <p>Revolutionizing glucose monitoring through voice analysis</p>
+        </div>
+        <div class="footer-links">
+          <div class="link-group">
+            <h3>Product</h3>
+            <a href="#">Features</a>
+            <a href="#">How It Works</a>
+            <a href="#">Pricing</a>
+            <a href="#">FAQ</a>
+          </div>
+          <div class="link-group">
+            <h3>Company</h3>
+            <a href="#">About Us</a>
+            <a href="#">Team</a>
+            <a href="#">Careers</a>
+            <a href="#">Contact</a>
+          </div>
+          <div class="link-group">
+            <h3>Resources</h3>
+            <a href="#">Blog</a>
+            <a href="#">Research</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 SweetVoice. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
