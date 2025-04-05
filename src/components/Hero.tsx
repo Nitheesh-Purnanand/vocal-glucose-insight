@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -16,9 +17,14 @@ const Hero = () => {
             SweetVoice uses advanced AI to analyze subtle vocal changes, offering a non-invasive alternative to traditional glucose monitoring.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="gradient-bg text-white hover:opacity-90 transition-opacity text-lg py-6 px-8">
-              Try Demo
-              <ArrowRight className="ml-2" size={18} />
+            <Button 
+              className="gradient-bg text-white hover:opacity-90 transition-opacity text-lg py-6 px-8"
+              asChild
+            >
+              <Link to="/demo">
+                Try Demo
+                <ArrowRight className="ml-2" size={18} />
+              </Link>
             </Button>
             <Button variant="outline" className="border-sweet-500 text-sweet-600 hover:bg-sweet-50 transition-colors text-lg py-6 px-8">
               Learn More
